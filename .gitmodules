@@ -1,15 +1,15 @@
 [submodule "baromesh"]
 	path = baromesh
-	url = git@github.com:BaroboRobotics/baromesh.git
+	url = https://github.com/BaroboRobotics/baromesh.git
 [submodule "ribbon-bridge"]
 	path = ribbon-bridge
-	url = git@github.com:BaroboRobotics/ribbon-bridge.git
+	url = https://github.com/BaroboRobotics/ribbon-bridge.git
 [submodule "cxx-util"]
 	path = cxx-util
-	url = git@github.com:BaroboRobotics/cxx-util.git
+	url = https://github.com/BaroboRobotics/cxx-util.git
 [submodule "libsfp"]
 	path = libsfp
-	url = git@github.com:BaroboRobotics/libsfp.git
+	url = https://github.com/BaroboRobotics/libsfp.git
 [submodule "libstkcomms"]
 	path = libstkcomms
-	url = git@github.com:BaroboRobotics/libstkcomms.git
+	url = https://github.com/BaroboRobotics/libstkcomms.git
