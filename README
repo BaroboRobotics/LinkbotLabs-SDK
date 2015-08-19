@@ -1,0 +1,74 @@
+This directory contains the source code for Linkbot Labs.
+
+
+Version Control / Source Preparation
+------------------------------------
+
+A simple 'git submodule update --init --recursive' should be all that is
+necessary to set everything up.
+
+Windows Requirements, Build, and Packaging
+------------------------------------------
+
+First ensure you have the following installed:
+
+  - Windows XP SP3 or greater
+  - Visual Studio 2013 (no optional packages required)
+  - any Windows SDK 6.0? through 7.1 (may require separate .NET framework)
+  - CMake (installed in PATH) (2.8.12 tested, other versions may work)
+  - nanopb 0.3.1 (it is easiest to use the binary distribution)
+  - Boost 1.57
+
+You only need to install the following components of the Windows SDK:
+  - Windows Native Code Development
+      -> Windows Headers and Libraries
+          -> [X] Windows Headers
+          -> [X] x86 Libraries
+      -> [X] Visual C++ Compiler
+      -> [X] Tools
+
+You are free to install additional components as desired.
+
+Ensure that CMake is installed to the system PATH.
+
+Extract nanopb and Boost wherever you like, and remember their locations.
+
+To build Boost and Linkbot Labs, open a Developer Command Prompt for VS2013. A
+shortcut to this should be available from the Start menu under
+Visual Studio 2013 -> Tools.
+
+Extract the Boost source archive wherever you like, change to that directory,
+then run:
+
+  .\bootstrap.bat
+  .\b2 --prefix=x:\path\to\where\you\want\boost\installed \
+       --with-system --with-filesystem \
+       --with-log --with-thread \
+       --with-program_options \
+       install
+
+You are now ready to build the Linkbot Labs SDK itself. Change to the directory
+containing this README, then execute:
+
+  mkdir build-msvc
+  cd build-msvc
+  set BOOST_ROOT=x:\path\to\where\you\wanted\boost\installed
+  set NANOPB_ROOT=x:\path\to\nanopb
+  cmake .. -G "Visual Studio 12 2013" -DBUILD_SHARED_LIBS=OFF
+  cmake --build . --config release
+
+An NSIS executable installer should appear in the current working directory.
+
+
+Linux Build Notes
+-----------------
+
+Cpack strips executables of their RPATH when creating install bundles.
+While this *is* the correct behavior, note that it can cause you, the
+developer, a moment of confusion. If you have libs installed in non-system
+locations, the stripped executables will not be able to find them.
+
+One solution is to use the executable that is found at
+<build>/barobobrowser, rather than digging out the one placed
+in the <build>/_CPack_Packages/ directories. Alternatively, set your
+LD_LIBRARY_PATH to include your non-system libse.
