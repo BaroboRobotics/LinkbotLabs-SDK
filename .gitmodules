@@ -13,3 +13,6 @@
 [submodule "libstkcomms"]
 	path = libstkcomms
 	url = https://github.com/BaroboRobotics/libstkcomms.git
+[submodule "usbcdc"]
+	path = usbcdc
+	url = git@github.com:BaroboRobotics/usbcdc.git
