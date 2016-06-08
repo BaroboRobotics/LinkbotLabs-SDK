@@ -7,12 +7,6 @@
 [submodule "cxx-util"]
 	path = cxx-util
 	url = https://github.com/BaroboRobotics/cxx-util.git
-[submodule "libsfp"]
-	path = libsfp
-	url = https://github.com/BaroboRobotics/libsfp.git
-[submodule "libstkcomms"]
-	path = libstkcomms
-	url = https://github.com/BaroboRobotics/libstkcomms.git
-[submodule "usbcdc"]
-	path = usbcdc
-	url = git@github.com:BaroboRobotics/usbcdc.git
+[submodule "interfaces"]
+	path = interfaces
+	url = git@github.com:BaroboRobotics/linkbot-interfaces.git
