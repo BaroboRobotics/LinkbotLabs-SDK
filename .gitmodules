@@ -10,3 +10,6 @@
 [submodule "interfaces"]
 	path = interfaces
 	url = git@github.com:BaroboRobotics/linkbot-interfaces.git
+[submodule "websocketpp"]
+	path = websocketpp
+	url = git@github.com:zaphoyd/websocketpp.git
