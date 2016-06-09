@@ -1,17 +1,34 @@
-cmake_minimum_required(VERSION 3.2.1)
-project(LinkbotLabs-SDK VERSION 0.1.0)
+ExternalProject_Add(websocketpp
+    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+    SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/websocketpp
+)
 
-set(AVR OFF)
-if(CMAKE_SYSTEM_NAME MATCHES "AVR")
-    set(AVR ON)
-endif()
+ExternalProject_Add(cxx-util
+    DEPENDS websocketpp
+    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+    SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/cxx-util
+)
 
-add_subdirectory(cxx-util EXCLUDE_FROM_ALL)
-add_subdirectory(libsfp EXCLUDE_FROM_ALL)
-add_subdirectory(ribbon-bridge EXCLUDE_FROM_ALL)
-add_subdirectory(baromesh EXCLUDE_FROM_ALL)
+ExternalProject_Add(nanopb
+    #URL "http://koti.kapsi.fi/~jpa/nanopb/download/nanopb-0.3.5-windows-x86.zip"
+    URL "https://s3.amazonaws.com/barobo/deps/nanopb-0.3.5-windows-x86.zip"
+    URL_MD5 "edf923dd23f87c75caecb5401e1b07c5"
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND ""
+    INSTALL_COMMAND ""
+)
 
-if(NOT AVR)
-    add_subdirectory(usbcdc EXCLUDE_FROM_ALL)
-    add_subdirectory(libstkcomms EXCLUDE_FROM_ALL)
-endif()
+ExternalProject_Get_Property(nanopb SOURCE_DIR)
+set(NANOPB_ROOT ${SOURCE_DIR})
+
+ExternalProject_Add(ribbon-bridge
+    DEPENDS nanopb
+    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DNANOPB_ROOT=${NANOPB_ROOT}
+    SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/ribbon-bridge
+)
+
+ExternalProject_Add(interfaces
+    DEPENDS ribbon-bridge
+    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DNANOPB_ROOT=${NANOPB_ROOT}
+    SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/interfaces
+)

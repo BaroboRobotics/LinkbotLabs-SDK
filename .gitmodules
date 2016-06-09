@@ -12,4 +12,4 @@
 	url = git@github.com:BaroboRobotics/linkbot-interfaces.git
 [submodule "websocketpp"]
 	path = websocketpp
-	url = git@github.com:zaphoyd/websocketpp.git
+	url = git@github.com:BaroboRobotics/websocketpp.git
